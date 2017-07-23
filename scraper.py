@@ -25,6 +25,19 @@ for year in prior_years:
 #Filter out no height players
 players = {name: height for name, height in players.items() if height != "No Height Found"}
 
+#Converting height to inches float
+for name, height in players.items():
+	feet = height.split("'")[0]
+	if len(feet) > 1:
+		inch = feet[1:]
+		feet = float(feet[0])
+		inches = float(inch + "." + height.split("'")[1].translate(None, "\""))
+	else: 
+		feet = float(feet)
+		inches = float(height.split("'")[1].translate(None, "\""))
+
+	players[name] = feet*12 + inches
+
 # To print as a table
 for name, height in players.items():
     print('{} {}'.format(name, height))
