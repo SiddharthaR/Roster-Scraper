@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.99 Safari/537.36'}
 
-prior_years = ["165", "137", "96", "97", "98", "99", "100"] #Need to programatically genearate this
+prior_years = ["165", "137", "96", "97", "98", "99", "100"] #Need to programatically generate this
 
 players = {}
 
@@ -38,6 +38,35 @@ for name, height in players.items():
 
 	players[name] = feet*12 + inches
 
-# To print as a table
-for name, height in players.items():
-    print('{} {}'.format(name, height))
+	# To print as a table
+def playerRoster():
+	for name, height in players.items():
+		print('{} {}'.format(name, height))
+
+def maxHeight():
+	maxHeight = 0.0
+	tallestPlayer = ""
+	for name, height in players.items():
+		if height > maxHeight:
+			maxHeight = height
+			tallestPlayer = name
+	return tallestPlayer + " " + str(maxHeight)
+
+def avgHeight():
+	totalHeight = 0.0
+	counter = 0
+	for name, height in players.items():
+		totalHeight += height
+		counter +=1
+	return str(round(totalHeight/counter, 2)) + " " + "inches"
+
+#User Requestable Data
+user_input = raw_input("What would you like to know? ")
+if user_input == "maxheight":
+	print maxHeight()
+if user_input == "roster":
+	print playerRoster()
+if user_input == "avg":
+	print avgHeight()
+
+
